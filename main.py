@@ -5,7 +5,7 @@ from pet_breed import PetBreed
 
 app = FastAPI()
 
-# list[Pet] - это аннотация типа 
+# list[Pet] - это аннотация типа
 pets_db: List[Pet] = []
 
 
