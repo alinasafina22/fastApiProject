@@ -10,17 +10,16 @@ class PetBase(BaseModel):
 
 
 class PetCreate(PetBase):
-    pass
+    id: int
 
 
 class Pet(PetBase):
     id: int
     name: str
     age: int
-    user_id: int
 
     class Config:
-        orm_mode = True
+        from_attributes = True
 
 
 class UserBase(BaseModel):
@@ -37,4 +36,4 @@ class User(UserBase):
     pet: str
 
     class Config:
-        orm_mode = True
+        from_attributes = True
