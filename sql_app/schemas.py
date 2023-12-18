@@ -10,7 +10,7 @@ class PetBase(BaseModel):
 
 
 class PetCreate(PetBase):
-    id: int
+    pass
 
 
 class Pet(PetBase):
@@ -24,15 +24,17 @@ class Pet(PetBase):
 
 class UserBase(BaseModel):
     name: str
+    email: str
 
 
 class UserCreate(UserBase):
-    id: int
+    pass
 
 
 class User(UserBase):
     id: int
     name: str
+    email: str
     pet: str
 
     class Config:
