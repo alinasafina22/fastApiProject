@@ -28,14 +28,13 @@ class UserBase(BaseModel):
 
 
 class UserCreate(UserBase):
-    pass
+    email: str
 
 
 class User(UserBase):
     id: int
     name: str
     email: str
-    pet: str
 
     class Config:
         from_attributes = True

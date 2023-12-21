@@ -9,3 +9,5 @@ class Pet(Base):
     id = Column(Integer, Sequence("pet_id_seq"), primary_key=True, index=True)
     name = Column(String, index=True)
     age = Column(Integer, index=True)
+
+
