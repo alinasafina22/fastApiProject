@@ -1,6 +1,6 @@
 from pydantic import BaseModel, Field
 from uuid import UUID, uuid4
-from typing import Annotated
+from typing import Annotated, List, Optional
 
 
 class PetBase(BaseModel):
@@ -10,11 +10,12 @@ class PetBase(BaseModel):
 
 
 class PetCreate(PetBase):
-    pass
+    user: int
 
 
 class Pet(PetBase):
     id: int
+    user: int
     name: str
     age: int
 
@@ -35,6 +36,7 @@ class User(UserBase):
     id: int
     name: str
     email: str
+    pets: Optional[List[Pet]] = None
 
     class Config:
         from_attributes = True

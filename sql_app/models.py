@@ -10,6 +10,8 @@ class Pet(Base):
     name = Column(String)
     age = Column(Integer)
 
+    user = Column(Integer, ForeignKey("users.id"))
+
 
 class User(Base):
     __tablename__ = "users"
