@@ -66,7 +66,6 @@ def get_user_by_id(db: Session, id: int):
 
         # Assign the pets_info list to the "pets" field in user_info
         user_info["pets"] = pets_info
-    print(user_info)
     return user_info
 
 
