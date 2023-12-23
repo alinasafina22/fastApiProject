@@ -28,25 +28,46 @@ def get_user_by_id(db: Session, id: int):
     #         .outerjoin(models.Pet, models.User.id == models.Pet.user)
     #         .filter(models.User.id == id)
     #         .all())
-    query = db.query(models.User, models.Pet)
+    query = db.query(models.User, models.Pet).filter(models.User.id == id)
     query = query.join(models.Pet, models.Pet.user == models.User.id)
     query = query.all()
     result = []
+    pets_info = []
+    user_info = None
     for user, pet in query:
-        user_info = {
-            "id": user.id,
-            "name": user.name,
-            "email": user.email,
-            "pets": {
-                "id": pet.id,
-                "user": pet.user,
-                "name": pet.name,
-                "age": pet.age
+        # user_info = {
+        #     "id": user.id,
+        #     "name": user.name,
+        #     "email": user.email,
+        #     "pets": {
+        #         "id": pet.id,
+        #         "user": pet.user,
+        #         "name": pet.name,
+        #         "age": pet.age
+        #     }
+        # }
+        # result.append(user_info)
+        if user_info is None:
+            # Create user_info dictionary only once
+            user_info = {
+                "id": user.id,
+                "name": user.name,
+                "email": user.email,
+                "pets": []
             }
-        }
-        result.append(user_info)
-    print(result)
-    return{"data": result}
+
+            # Add pet information to the pets list
+        pets_info.append({
+            "id": pet.id,
+            "user": pet.user,
+            "name": pet.name,
+            "age": pet.age
+        })
+
+        # Assign the pets_info list to the "pets" field in user_info
+        user_info["pets"] = pets_info
+    print(user_info)
+    return user_info
 
 
 def get_pet(db: Session, pet_id: int):
