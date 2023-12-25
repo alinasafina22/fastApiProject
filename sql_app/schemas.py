@@ -1,4 +1,4 @@
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, Field, EmailStr
 from uuid import UUID, uuid4
 from typing import Annotated, List, Optional
 
@@ -25,11 +25,11 @@ class Pet(PetBase):
 
 class UserBase(BaseModel):
     name: str
-    email: str
+    email: EmailStr
 
 
 class UserCreate(UserBase):
-    email: str
+    email: EmailStr
 
 
 class User(UserBase):
