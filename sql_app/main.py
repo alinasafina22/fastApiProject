@@ -45,3 +45,12 @@ async def get_user(id_user: int, db: Session = Depends(get_db)):
 @app.get("/get-pet/{id_pet}", response_model=schemas.Pet)
 async def get_pet(id_pet: int, db: Session = Depends(get_db)):
     return crud.get_pet(db, pet_id=id_pet)
+
+
+@app.delete("/delete-pet/{pet_id}")
+async def delete_pet(pet_id: int, db: Session = Depends(get_db)):
+    try:
+        crud.delete_pet(db, pet_id=pet_id)
+        return "OK"
+    except HTTPException:
+        raise HTTPException(status_code=404, detail=f"Pet with id {pet_id} not found")

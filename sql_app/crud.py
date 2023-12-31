@@ -1,6 +1,7 @@
 from sqlalchemy.orm import Session, joinedload
 import models
 import schemas
+from fastapi import HTTPException
 
 
 def create_pet(db: Session, pet: schemas.PetCreate):
@@ -71,3 +72,11 @@ def get_user_by_id(db: Session, id: int):
 
 def get_pet(db: Session, pet_id: int):
     return db.query(models.Pet).filter(models.Pet.id == pet_id).first()
+
+
+def delete_pet(db: Session, pet_id: int):
+    pet_for_delete = db.query(models.Pet).filter(models.Pet.id == pet_id).first()
+    if pet_for_delete is None:
+        # Если питомец не найден, поднимаем HTTPException с кодом состояния 404 (Not Found)
+        raise HTTPException(status_code=404)
+    return db.delete(pet_for_delete)
